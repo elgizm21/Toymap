@@ -1,5 +1,6 @@
-# əgər faktiki git root dəyişib toymap/ səviyyəsidirsə, orada yerləşdir:
 [build]
-  base    = "client"
+  # Vite appını bu məkanda qururuq,
+  # çünki bu qovluqda paketi var: package.json, vite.config.js, src/, vb.
   command = "npm install && npm run build"
-  publish = "client/dist"
+  # Vite build nəticəsi dist/ qovluğuna gəlir:
+  publish = "dist"
