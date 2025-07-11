@@ -1,6 +1,5 @@
-# client/netlify.toml
+# əgər faktiki git root dəyişib toymap/ səviyyəsidirsə, orada yerləşdir:
 [build]
-  # bu qovluqda olduğumuza görə artıq 'cd client' yazmağa ehtiyac yoxdur
-  command   = "npm install && npm run build"
-  # React (Vite) build nəticəsi dist/ qovluğunda yaranır
-  publish   = "dist"
+  base    = "client"
+  command = "npm install && npm run build"
+  publish = "client/dist"
