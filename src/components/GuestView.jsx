@@ -7,17 +7,13 @@ export default function GuestView({ assignments, ads }) {
   const handleFind = () => {
     const key = name.trim();
     if (!key) return;
-    if (assignments[key]) {
-      setFoundTable(assignments[key]);
-    } else {
-      setFoundTable("not-found");
-    }
+    setFoundTable(assignments[key] || "not-found");
   };
 
   return (
-    <div className="flex flex-col flex-1">
+    <div className="flex flex-col flex-1 bg-pink-50">
       {/* Header */}
-      <header className="bg-rose-100 py-8">
+      <header className="bg-pink-100 py-8">
         <div className="max-w-4xl mx-auto text-center px-4">
           <h1 className="text-5xl font-serif text-rose-800">
             Ali və Aygün Toy Məclisinə Xoş Gəlmisiniz!
@@ -39,7 +35,6 @@ export default function GuestView({ assignments, ads }) {
             <p className="text-gray-700 mb-6">
               Zəhmət olmasa adınızı və soyadınızı daxil edin.
             </p>
-
             <div className="space-y-4">
               <input
                 type="text"
@@ -103,7 +98,7 @@ export default function GuestView({ assignments, ads }) {
       <footer className="py-4">
         <div className="max-w-4xl mx-auto text-center px-4">
           <p>
-            Əlaqə: +994 50 123 45 67 &nbsp;|&nbsp; @ToyMəclisiBaku
+            Əlaqə: +994 50 123 45 67 &nbsp;|&nbsp; @Toymap.az
           </p>
           <p className="text-sm opacity-75">Təşəkkür edirik!</p>
         </div>

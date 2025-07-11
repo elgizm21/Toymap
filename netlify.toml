@@ -1,6 +1,0 @@
-[build]
-  # Vite appını bu məkanda qururuq,
-  # çünki bu qovluqda paketi var: package.json, vite.config.js, src/, vb.
-  command = "npm install && npm run build"
-  # Vite build nəticəsi dist/ qovluğuna gəlir:
-  publish = "dist"

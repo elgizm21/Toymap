@@ -1,24 +1,35 @@
-// src/App.jsx
+// client/src/App.jsx
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import GuestView from './components/GuestView';
+import GuestView  from './components/GuestView';
 import AdminPanel from './components/AdminPanel';
 
 export default function App() {
+  // Bu dəyişən .env-dən gələn API ünvanıdır
+  const API = import.meta.env.VITE_API_URL;
+
+  const [tables,      setTables      ] = useState([]);
   const [assignments, setAssignments] = useState({});
-  const [ads, setAds] = useState([]);
+  const [ads,         setAds         ] = useState([]);
 
   useEffect(() => {
-    // həm assignments, həm ads
-    fetch('/api/assignments')
+    // Bütün fetch çağırışlarında artıq API dəyişənini istifadə edirik
+    fetch(`${API}/api/tables`)
       .then(r => r.json())
-      .then(setAssignments);
+      .then(setTables)
+      .catch(console.error);
 
-    fetch('/api/ads')
+    fetch(`${API}/api/assignments`)
       .then(r => r.json())
-      .then(setAds);
-  }, []);
+      .then(setAssignments)
+      .catch(console.error);
+
+    fetch(`${API}/api/ads`)
+      .then(r => r.json())
+      .then(setAds)
+      .catch(console.error);
+  }, [API]);
 
   return (
     <BrowserRouter>
@@ -31,6 +42,8 @@ export default function App() {
           path="/admin"
           element={
             <AdminPanel
+              tables={tables}
+              setTables={setTables}
               assignments={assignments}
               setAssignments={setAssignments}
               ads={ads}
