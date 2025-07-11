@@ -1,0 +1,7 @@
+[build]
+  # 1) əvvəl client qovluğuna keç
+  base    = "client"
+  # 2) burada install + build komandamızı yaz
+  command = "npm install && npm run build"
+  # 3) build nəticəsində yaranan qovluq
+  publish = "client/dist"
