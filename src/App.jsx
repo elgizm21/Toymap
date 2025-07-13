@@ -1,43 +1,55 @@
 // client/src/App.jsx
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
-import GuestView  from './components/GuestView';
-import AdminPanel from './components/AdminPanel';
+import GuestView  from './components/GuestView'
+import AdminPanel from './components/AdminPanel'
 
 export default function App() {
-  // Bu dəyişən .env-dən gələn API ünvanıdır
-  const API = import.meta.env.VITE_API_URL;
+  // 1️⃣ .env faylından gələn baza URL-i. Məsələn: http://localhost:4000
+  const API = import.meta.env.VITE_API_URL
 
-  const [tables,      setTables      ] = useState([]);
-  const [assignments, setAssignments] = useState({});
-  const [ads,         setAds         ] = useState([]);
+  // 2️⃣ Bütün əsas state-lər burada yaşayır
+  const [tables,      setTables      ] = useState([])
+  const [assignments, setAssignments] = useState({})
+  const [ads,         setAds         ] = useState([])
 
+  // 3️⃣ İlk render zamanı serverdən datanı yükləyirik
   useEffect(() => {
-    // Bütün fetch çağırışlarında artıq API dəyişənini istifadə edirik
+    // Masalar
     fetch(`${API}/api/tables`)
-      .then(r => r.json())
+      .then(res => res.json())
       .then(setTables)
-      .catch(console.error);
+      .catch(err => console.error('tables load error:', err))
 
+    // Təyinatlar
     fetch(`${API}/api/assignments`)
-      .then(r => r.json())
+      .then(res => res.json())
       .then(setAssignments)
-      .catch(console.error);
+      .catch(err => console.error('assignments load error:', err))
 
+    // Reklamlar
     fetch(`${API}/api/ads`)
-      .then(r => r.json())
+      .then(res => res.json())
       .then(setAds)
-      .catch(console.error);
-  }, [API]);
+      .catch(err => console.error('ads load error:', err))
+  }, [API])
 
   return (
     <BrowserRouter>
       <Routes>
+        {/* Müştəri görünüşü */}
         <Route
           path="/"
-          element={<GuestView assignments={assignments} ads={ads} />}
+          element={
+            <GuestView
+              assignments={assignments}
+              ads={ads}
+            />
+          }
         />
+
+        {/* Admin panel */}
         <Route
           path="/admin"
           element={
@@ -53,5 +65,5 @@ export default function App() {
         />
       </Routes>
     </BrowserRouter>
-  );
+  )
 }
