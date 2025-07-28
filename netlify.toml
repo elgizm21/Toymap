@@ -1,0 +1,13 @@
+# client/netlify.toml
+
+[build]
+  # client qovluğunda işləyəcək:
+  command = "npm install && npm run build"
+  # Vite build nəticəsini bu qovluqdan yayımlayır
+  publish = "dist"
+
+# React-Router-lı SPA üçün bütün routları index.html-ə yönləndir
+[[redirects]]
+  from   = "/*"
+  to     = "/index.html"
+  status = 200
